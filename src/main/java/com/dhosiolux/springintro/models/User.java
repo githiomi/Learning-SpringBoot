@@ -17,7 +17,7 @@ import java.time.LocalDate;
 
 @Data
 @Table
-@Entity
+@Entity(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
@@ -47,9 +47,9 @@ public class User {
         this.dob = dob;
 
         // compare months
-        if (LocalDate.now().getMonth().compareTo(dob.getMonth()) > 0){
+        if (LocalDate.now().getMonth().compareTo(dob.getMonth()) > 0) {
             this.age = LocalDate.now().getYear() - dob.getYear();
-        }else {
+        } else {
             this.age = LocalDate.now().getYear() - dob.getYear() - 1;
         }
 
