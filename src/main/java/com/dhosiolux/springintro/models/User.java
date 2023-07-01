@@ -20,7 +20,7 @@ import java.time.LocalDate;
 public class User {
 
     // Class variables
-    public static int noOfUsers;
+    public static int noOfUsers = 0;
 
     // User objects fields
     private int userId;
@@ -28,14 +28,15 @@ public class User {
     private String email;
     private LocalDate dob;
     private int age;
-    private String gender;
+    private Gender gender;
 
     // User objects constructors
-    public User(String userName, String email, LocalDate dob, String gender) {
+    public User(String userName, String email, LocalDate dob, Gender gender) {
         this.userId = ++noOfUsers;
         this.userName = userName;
         this.email = email;
         this.dob = dob;
+        this.age = LocalDate.now().getYear() - dob.getYear();
         this.gender = gender;
     }
 }

@@ -8,17 +8,23 @@ package com.dhosiolux.springintro.controllers;
  *
  */
 
+import com.dhosiolux.springintro.models.Gender;
 import com.dhosiolux.springintro.models.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
+
 @RestController
 public class SpringController {
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/users/1")
     protected User getUser(){
         return new User(
-
+                "Daniel Githiomi",
+                "daniel@githiomi.com",
+                LocalDate.of(2001, 8, 27),
+                Gender.MALE
         );
     }
 
