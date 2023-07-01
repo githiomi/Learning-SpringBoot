@@ -8,13 +8,21 @@ package com.dhosiolux.springintro.controllers;
  *
  */
 
+import com.dhosiolux.springintro.models.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SpringController {
 
-    @GetMapping()
+    @GetMapping(path = "/")
+    protected User getUser(){
+        return new User(
+
+        );
+    }
+
+    @GetMapping(path = "/hello")
     protected String helloWorld(){
         return "Hello World!";
     }
