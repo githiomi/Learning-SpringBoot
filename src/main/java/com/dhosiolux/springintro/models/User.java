@@ -8,6 +8,7 @@ package com.dhosiolux.springintro.models;
  *
  */
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,14 +16,23 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Data
+@Table
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
 
-    // Class variables
-    public static int noOfUsers = 0;
-
     // User objects fields
+    @Id
+    @SequenceGenerator(
+            name = "user_sequence",
+            sequenceName = "user_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_sequence"
+    )
     private int userId;
     private String userName;
     private String email;
@@ -32,11 +42,18 @@ public class User {
 
     // User objects constructors
     public User(String userName, String email, LocalDate dob, Gender gender) {
-        this.userId = ++noOfUsers;
         this.userName = userName;
         this.email = email;
         this.dob = dob;
-        this.age = LocalDate.now().getYear() - dob.getYear();
+
+        // compare months
+        if (LocalDate.now().getMonth().compareTo(dob.getMonth()) > 0){
+            this.age = LocalDate.now().getYear() - dob.getYear();
+        }else {
+            this.age = LocalDate.now().getYear() - dob.getYear() - 1;
+        }
+
         this.gender = gender;
     }
+
 }
