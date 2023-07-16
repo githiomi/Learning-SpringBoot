@@ -11,9 +11,8 @@ package com.dhosiolux.springintro.controllers;
 import com.dhosiolux.springintro.models.User;
 import com.dhosiolux.springintro.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +32,12 @@ public class SpringController {
     @GetMapping(path = "/users")
     protected List<User> getUsers() {
         return userService.getUsers();
+    }
+
+    @PostMapping(path = "/users/new")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    protected User createUser(@RequestBody User user){
+        return userService.createUser(user);
     }
 
 }

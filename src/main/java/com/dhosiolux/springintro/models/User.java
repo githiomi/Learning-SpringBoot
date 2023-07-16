@@ -35,7 +35,6 @@ public class User {
     private String email;
     @Column(name = "date_of_birth")
     private LocalDate dob;
-    @Transient
     private int age;
     private Gender gender;
 
@@ -44,18 +43,20 @@ public class User {
         this.userName = userName;
         this.email = email;
         this.dob = dob;
-        this.age = getCurrentAge();
         this.gender = gender;
+        this.getCurrentAge(dob);
     }
 
     // Method to calculate the age of the user
-    protected int getCurrentAge(){
+    public void getCurrentAge(LocalDate dob){
 
         // compare months
         if (LocalDate.now().getMonth().compareTo(dob.getMonth()) > 0) {
-            return this.age = LocalDate.now().getYear() - dob.getYear();
+            System.out.println("Don't subtract 1");
+            this.setAge(LocalDate.now().getYear() - dob.getYear());
         } else {
-            return this.age = LocalDate.now().getYear() - dob.getYear() - 1;
+            System.out.println("Subtract 1");
+            this.setAge(LocalDate.now().getYear() - dob.getYear() - 1);
         }
 
     }
