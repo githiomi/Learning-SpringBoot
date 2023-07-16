@@ -9,7 +9,12 @@ package com.dhosiolux.springintro.models;
  */
 
 public enum Gender {
+    MALE("MALE"),
+    FEMALE("FEMALE");
 
-    MALE,
-    FEMALE
+    public final String gender;
+
+    Gender(String gender){
+        this.gender = gender;
+    }
 }

@@ -10,42 +10,26 @@ package com.dhosiolux.springintro.services;
 
 import com.dhosiolux.springintro.models.Gender;
 import com.dhosiolux.springintro.models.User;
+import com.dhosiolux.springintro.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import java.util.List;
 
 @Service
 public class UserService {
 
-    // Method to get a single user
-    public User getUser() {
-        return new User(
-                "Daniel Githiomi",
-                "daniel@githiomi.com",
-                LocalDate.of(2001, 8, 27),
-                Gender.MALE
-        );
+    // Inject the repository
+    public final UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
     }
 
-    // Method to get all the users
-    public ArrayList<User> getUsers() {
-        return new ArrayList<User>(
-                Arrays.asList(
-                        new User(
-                                "Daniel Githiomi",
-                                "daniel@githiomi.com",
-                                LocalDate.of(2001, 8, 27),
-                                Gender.MALE
-                        ),
-                        new User(
-                                "Faith Wamaitha",
-                                "faith@wamaitha.com",
-                                LocalDate.of(1998, 7, 17),
-                                Gender.FEMALE
-                        )
-                ));
+    // Method to get a single user
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
+
 }

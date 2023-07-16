@@ -34,3 +34,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### To hide the secrets
+src/main/resources/secrets.properties

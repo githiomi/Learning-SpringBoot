@@ -14,6 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @Table
@@ -24,19 +25,17 @@ public class User {
 
     // User objects fields
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
+            strategy = GenerationType.UUID
     )
-    private int userId;
+    @Column(name = "user_id")
+    private UUID userId;
+    @Column(name = "username")
     private String userName;
     private String email;
+    @Column(name = "date_of_birth")
     private LocalDate dob;
+    @Transient
     private int age;
     private Gender gender;
 
@@ -45,15 +44,20 @@ public class User {
         this.userName = userName;
         this.email = email;
         this.dob = dob;
+        this.age = getCurrentAge();
+        this.gender = gender;
+    }
+
+    // Method to calculate the age of the user
+    protected int getCurrentAge(){
 
         // compare months
         if (LocalDate.now().getMonth().compareTo(dob.getMonth()) > 0) {
-            this.age = LocalDate.now().getYear() - dob.getYear();
+            return this.age = LocalDate.now().getYear() - dob.getYear();
         } else {
-            this.age = LocalDate.now().getYear() - dob.getYear() - 1;
+            return this.age = LocalDate.now().getYear() - dob.getYear() - 1;
         }
 
-        this.gender = gender;
     }
 
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1")
@@ -29,13 +30,8 @@ public class SpringController {
         this.userService = userService;
     }
 
-    @GetMapping(path = "/users/1")
-    protected User getUser() {
-        return userService.getUser();
-    }
-
     @GetMapping(path = "/users")
-    protected ArrayList<User> getUsers() {
+    protected List<User> getUsers() {
         return userService.getUsers();
     }
 
